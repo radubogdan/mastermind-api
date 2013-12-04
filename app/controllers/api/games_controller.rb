@@ -4,20 +4,15 @@ class Api::GamesController < ApplicationController
 
   def new
     @game.generate_number
-
-    # Debugging
-    if @game.save
-      render json: @game.number, status: :created
-    end
   end
 
   def create
-    if @game.has_unique_digits?(params[:input])
+    if @game.validations(params[:input])
       result = @game.generate_output(@game.number.to_s, params[:input])
       @game.update_attributes(tries: @game.tries + 1)
-      render json: { result: [bulls: result, cows: 4 - result] }
+      render json: { mastermind: [bulls: result[0], cows: result[1], tries: @game.tries] }
     else 
-      render json: { result: 'Invalid guess' }
+      render json: { mastermind: 'Invalid guess' }
     end
   end
 
