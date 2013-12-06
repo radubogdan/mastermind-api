@@ -36,6 +36,7 @@ GEM
     i18n (0.6.1)
     journey (1.0.4)
     json (1.8.1)
+    kgio (2.8.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -73,6 +74,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.10.0)
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -87,6 +89,10 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
+    unicorn (4.6.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
 
 PLATFORMS
   ruby
@@ -97,3 +103,4 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   rails-api
+  unicorn
