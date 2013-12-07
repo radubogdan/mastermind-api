@@ -1,6 +1,8 @@
 class Api::GamesController < ApplicationController
+  require 'digest/sha1'
+
   before_filter :generate_token, only: [:new]
-  before_filter :check_game_token, only: [:create, :destroy]
+  before_filter :check_game_token, only: [:create]
 
   def new
     @game.generate_number
@@ -13,13 +15,17 @@ class Api::GamesController < ApplicationController
       result = @game.generate_output(@game.number.to_s, params[:input])
       @game.update_attributes(tries: @game.tries + 1)
       render json: { mastermind: [bulls: result[0], cows: result[1], tries: @game.tries] }
+      if result[0] == 4
+        @game.update_attributes(number: nil)
+      end
     else
       render json: { mastermind: 'Invalid guess' }
     end
   end
 
-  def destroy
-
+  def show
+    @game = Game.find_by_sql("SELECT name,tries FROM games WHERE number IS NULL ORDER BY tries ASC")
+    render json: @game
   end
 
   private
@@ -33,6 +39,6 @@ class Api::GamesController < ApplicationController
 
   def generate_token
     @game = Game.new
-    @game.game_token = BCrypt::Password.create(Time.now.to_s)
+    @game.game_token = SecureRandom.uuid
   end
 end

@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  attr_accessible :tries
+  attr_accessible :tries, :number
 
   def generate_output(number, guess)
     number_list = number.scan(/\d/).map { |n| n.to_i }
