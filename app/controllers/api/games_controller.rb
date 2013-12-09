@@ -3,7 +3,7 @@ class Api::GamesController < ApplicationController
 
   before_filter :generate_token, only: [:new]
   before_filter :check_game_token, only: [:create]
-  after_filter :add_cors_in_header, only: [:new, :create]
+  after_filter :add_cors_in_header, only: [:new, :create, :show]
 
   def new
     @game.generate_number
@@ -14,7 +14,7 @@ class Api::GamesController < ApplicationController
   def create
     if @game.validations(params[:guess])
       result = @game.generate_output(@game.number.to_s, params[:guess])
-      @game.update_attributes(tries: @game.tries + 1)
+      @game.update_attributes(tries: @game.tries + 1, name: params[:name])
       render json: { mastermind: { bulls: result[0], cows: result[1], tries: @game.tries } }
       if result[0] == 4
         @game.update_attributes(number: nil)
