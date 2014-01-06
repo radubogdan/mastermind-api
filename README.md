@@ -15,6 +15,8 @@ Make sure you have everything from Gemfile
 % bundle
 ```
 
+Add a database.yml file to your config folder (you can use the sample as a starter).
+
 Create the database and migrate it:
 ```
 % rake db:create && rake db:migrate
@@ -25,10 +27,9 @@ Start the WEBrick server:
 % rails s
 ```
 
-If you have a server, there is a deploy.rb file in config/ where you have to change credentials and deploy the application using mina. Also, in production
+If you have a server, there is a ```deploy.rb``` file in config folder where you have to change credentials and deploy the application using mina. Also, in production
 I configured this with [Unicorn](http://unicorn.bogomips.org/).
 
-Feel free to change everything you want. You can contribute to this using Fork and Pull Request.
 
 ### API Calls
 
@@ -41,7 +42,8 @@ To submit a guess, make POST request a ```/api/games/``` with following paramete
 
 Responses are json objects.
 
-Example:
+### Example:
+
 Init a new game: ``` curl -X GET http://localhost:3000/api/games/new ```
 Respose: ``` {"mastermind":{"game_token":"a1ba76a1-9921-4932-b391-cb4be016c39a"}} ```
 
@@ -55,12 +57,15 @@ id | number |              game_token              | name | tries |        creat
  (1 row)
 
 ```
+
 Make a guess: ``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1234" ```
 Response: ```{"mastermind":{"bulls":2,"cows":0,"tries":1}}```
 
 After you guess the number, to mark a complete game, number will be deleted:
+
 Make a guess: ``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1854 -F "name=Radu" ```
 Response: ``` {"mastermind":{"bulls":4,"cows":0,"tries":2}} ```
+
 Database: 
 
 ```
@@ -73,6 +78,7 @@ id | number |              game_token              | name | tries |         crea
 ```
 
 ### Jquery Example 
+
 ```
 var start = function(){
     var mastermindApi = 'http://localhost:3000/api/games/new';
@@ -108,8 +114,12 @@ $("#send").on("click", function() {
 ```
 
 ### Authors
-[Radu-Bogdan Croitoru](https://github.com/radubogdan)
-[George Bejan](https://github.com/georgebejan)
+
+* [Radu-Bogdan Croitoru](https://github.com/radubogdan)
+* [George Bejan](https://github.com/georgebejan)
 
 ### License
+
 See [License](https://github.com/radubogdan/mastermind-api/blob/master/LICENSE)
+
+Feel free to change everything you want. You can contribute to this using Fork and Pull Request.
