@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mastermind_development
+  pool: 5
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: mastermind_test
+  pool: 5
+  min_messages: warning
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: mastermind_production
+  pool: 5
+  min_messages: warning
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: mastermind_staging
+  pool: 5
+  min_messages: warning
