@@ -6,6 +6,7 @@ with numbers.
 ### How to use this?
 
 Clone the repository:
+
 ```
 % git clone git@github.com:radubogdan/mastermind-api.git
 ```
@@ -44,8 +45,13 @@ Responses are json objects.
 
 ### Example:
 
-Init a new game: ``` curl -X GET http://localhost:3000/api/games/new ```
-Respose: ``` {"mastermind":{"game_token":"a1ba76a1-9921-4932-b391-cb4be016c39a"}} ```
+Init a new game: 
+
+``` curl -X GET http://localhost:3000/api/games/new ```
+
+Respose: 
+
+``` {"mastermind":{"game_token":"a1ba76a1-9921-4932-b391-cb4be016c39a"}} ```
 
 What's in the database: ```select * from games;```
 
@@ -58,13 +64,23 @@ id | number |              game_token              | name | tries |        creat
 
 ```
 
-Make a guess: ``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1234" ```
-Response: ```{"mastermind":{"bulls":2,"cows":0,"tries":1}}```
+Make a guess: 
 
-After you guess the number, to mark a complete game, number will be deleted:
+``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1234" ```
 
-Make a guess: ``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1854 -F "name=Radu" ```
-Response: ``` {"mastermind":{"bulls":4,"cows":0,"tries":2}} ```
+Response: 
+
+```{"mastermind":{"bulls":2,"cows":0,"tries":1}}```
+
+After you guess the number, to mark a complete game, number will be deleted.
+
+Make a guess: 
+
+``` curl -X POST http://localhost:3000/api/games -F "game_token=a1ba76a1-9921-4932-b391-cb4be016c39a" -F "guess=1854 -F "name=Radu" ```
+
+Response: 
+
+``` {"mastermind":{"bulls":4,"cows":0,"tries":2}} ```
 
 Database: 
 
