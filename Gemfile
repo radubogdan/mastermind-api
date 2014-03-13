@@ -6,3 +6,4 @@ gem 'pg'
 gem "uuid", :require => "securerandom"
 gem 'mina'
 gem 'unicorn'
+gem 'newrelic_rpm'
